@@ -1,32 +1,31 @@
 # **Traffic Sign Recognition** 
 
-## Writeup
+Ray Khorsandi
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+December 2017
 
----
+## Introduction
 
-**Build a Traffic Sign Recognition Project**
 
-The goals / steps of this project are the following:
-* Load the data set (see below for links to the project data set)
+In this project, we build a Traffic Sign Recognition. 
+
+The steps of this project are the following:
+
+* Load the data set 
 * Explore, summarize and visualize the data set
-* Design, train and test a model architecture
-* Use the model to make predictions on new images
+* Design, train and test LeNet model
+* Use the model to make predictions on new images from web
 * Analyze the softmax probabilities of the new images
-* Summarize the results with a written report
+* Conclusion
+
+## DataSet
+The model is trained on images from [German Traffic Sign Dataset] (http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset)
 
 
-[//]: # (Image References)
+<img src="examples/samples.jpg" width="200"/> <img src="examples/sample1.jpg" width="200"/> <img src="examples/sample2.jpg" width="200"/>
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+<img src="examples/sample3.jpg" width="200"/> <img src="examples/sample4.jpg" width="200"/> <img src="examples/sample5.jpg" width="200"/>
+
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -36,7 +35,7 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code]()
 
 ### Data Set Summary & Exploration
 
