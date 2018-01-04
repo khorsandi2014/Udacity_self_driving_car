@@ -99,6 +99,19 @@ To combat the overfitting, I modified the model so that I added more convlutiona
 
 Then I augmented images by fliping the images and angles and using left and right side images.  
 
+Center image:
+<img src="./images/center.jpg" width="480" alt="autonomous" />
+
+
+Left image and flipped left image:
+
+<img src="./images/left.jpg" width="200" alt="autonomous" /> <img src="./images/left_fliped.jpg" width="200" alt="autonomous" />
+
+Right image and flipped right image:
+
+<img src="./images/right.jpg" width="200" alt="autonomous" /> <img src="./images/right_fliped.jpg" width="200" alt="autonomous" />
+
+
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track. To improve the driving behavior in these cases, I collected more data and used augmentation by flipping images and using left and right cameras.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
