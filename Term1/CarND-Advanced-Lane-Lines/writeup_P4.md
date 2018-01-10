@@ -6,7 +6,7 @@ January 2017
 
 ---
 
-**Advanced Lane Finding Project**
+**CarND-Advanced-Lane-Lines Project**
 
 The goals / steps of this project are the following:
 
@@ -47,7 +47,7 @@ Three images are not shown since the original images miss some of the corners.
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-<img src="./writeup_images/undistorted_chessboards.png"alt="autonomous" />
+<img src="./writeup_images/undistorted_chessboards.png" alt="autonomous" />
 
 
 ### Pipeline (single images)
