@@ -6,7 +6,7 @@ January 2017
 
 ---
 
-**CarND-Advanced-Lane-Lines Project**
+**Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
 
@@ -47,7 +47,7 @@ Three images are not shown since the original images miss some of the corners.
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-<img src="./writeup_images/undistorted_chessboards.png" alt="autonomous" />
+<img src="./writeup_images/undistorted_chessboards.png"alt="autonomous" />
 
 
 ### Pipeline (single images)
@@ -61,7 +61,10 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps in cell #3 in `Advanced Lane Detection P4.ipynb`).  Here's an example of my output for this step.  
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps in cell #3 in `Advanced Lane Detection P4.ipynb`)
+I used gradient on x direction (horizontal) and gradient direction to get the edges. To detect yellow lines, R and G channels are used. Finally, S and L channels from HLS are used to detect white and bright yellow. All of these binary thresholded images are combined and then mask to get lanes as much as possible
+
+ Here's an example of my output for this step.  
 
 <img src="./writeup_images/unwarped_image.png" alt="autonomous" />
 
@@ -98,6 +101,16 @@ I verified that my perspective transform was working as expected by drawing the 
 Then in 10th cell code, I used histogram on the bottom half of the unwarped binary image to find the left and right line base. By using sliding window, the points related to left and right lanes are detected. 
 
 
+My algorithm found some lines but I check that the detection makes sense. To confirm that detected lane lines are real:
+
+* Checking that they have similar curvature
+* Checking that they are separated by approximately the right distance horizontally
+* Checking that they are roughly parallel
+
+If sanity checks reveal that the detected lane lines are problematic for some reason, I assume it was a bad or difficult frame of video, retain the previous positions from the frame prior and step to the next frame to search again. If we lose the lines for several frames in a row, we should probably start searching from scratch using a histogram and sliding window. Even when everything is working, line detections jump around from frame to frame a bit and it can be preferable to smooth over the last n frames of video to obtain a cleaner result. Each time we get a new high-confidence measurement, we can append it to the list of recent measurements and then take an average over n past measurements to obtain the lane position we want to draw onto the image.
+
+
+
 <img src="./writeup_images/lane_detection.png" width="300" alt="autonomous" /> <img src="./writeup_images/lane_detection2.png" width="300" alt="autonomous" />
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
@@ -129,18 +142,9 @@ Here's a [link to my video result](./project_video_output.mp4)
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
+The main issue was finding thresholding and finding the right channels and gradients to extract lines as accurate as possible. I had to tune threshold values many times to get the best result. 
 
 It is not reasonable to look for the lanes in the whole image. After finding the lanes in the first frame, we can use it as a base for the next frames to limit the search area with a margin. In this case, it reduces the computations and improve the speed. 
 
 We assumed the camera is mounted at the center of the car and lines are straight, such that the lane center is the midpoint at the bottom of the image between the two lines you've detected. Sometimes these assumptions are not correct. 
-
-My algorithm found some lines but I should check that the detection makes sense. To confirm that detected lane lines are real:
-
-* Checking that they have similar curvature
-* Checking that they are separated by approximately the right distance horizontally
-* Checking that they are roughly parallel
-
-If sanity checks reveal that the detected lane lines are problematic for some reason, I assume it was a bad or difficult frame of video, retain the previous positions from the frame prior and step to the next frame to search again. If we lose the lines for several frames in a row, we should probably start searching from scratch using a histogram and sliding window.
-
-Even when everything is working, line detections jump around from frame to frame a bit and it can be preferable to smooth over the last n frames of video to obtain a cleaner result. Each time we get a new high-confidence measurement, we can append it to the list of recent measurements and then take an average over n past measurements to obtain the lane position we want to draw onto the image.
 
